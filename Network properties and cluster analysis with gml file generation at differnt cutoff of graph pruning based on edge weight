@@ -1,6 +1,7 @@
-## R Code to make graph (gml) file from given similarity matrix  ###
-## And To get graph theoretic properties and clusters description###
-## for differnt cutoff for edge pruning ( Prune in terms of similarity value) ##########
+################################################################################
+## R Code to make graph (gml) file from given similarity matrix  ###############
+## And To get graph theoretic properties and clusters description###############
+## for differnt cutoff for edge pruning ( Prune in terms of similarity value) ##
 ## Author: Niraj kumar khemka                             #######################
 ## Affliation : Jawaharlal Nehru University, New Delhi ##########################
 #################################################################################
@@ -13,7 +14,7 @@ name <- readline(prompt="Enter name of the data matrix (as want in output) : ");
 a1 <- as.integer(readline(prompt="Enter an initial cutoff (in integer; e.g : Enter 1 for cutoff start 0.01): " ))
 a2 <- as.integer(readline(prompt="Enter an final cutoff (in integer; e.g :Enter 100 for cutoff end point 1): "))
 a3 <- as.integer(readline(prompt="Enter an increment value (in integer , e.g :Enter 5 for cutoff incerace 0.05): "))
-
+install.package(igraph)
 library(igraph)
 a = seq(a1,a2,a3) # defining cutoff range
 a = a/100         # defining cutoff range     
