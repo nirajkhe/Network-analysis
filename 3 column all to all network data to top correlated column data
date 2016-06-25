@@ -1,0 +1,20 @@
+library(reshape2)
+network <- read.delim("~/Desktop/network.csv")
+
+corr_mat <- acast(network, gene1~gene2, value.var="Correlation")
+#calculate the quantile value based on sample size # to calculate quantile value .9945 , 1- 10/1790   here 10 is top 10 connection, 1790 sample size
+q <- quantile(corr_mat,.9945)
+a <- corr_mat
+b <- matrix(0,nrow=dim(a)[1],ncol=dim(a)[1])
+colnames(b) <- colnames(a)
+rownames(b) <- rownames(a)
+for(i in 1:dim(corr_mat)[1]){
+  rm(q)
+  q <- quantile(corr_mat[i,],.9945) # to calculate quantile value .9945 , 1- 10/1790   here 10 is top 10 connection, 1790 sample size
+  
+  b[i,] <- replace(a[i,],a[i,]<= q,0)
+}
+z <- melt(b)
+nonzero <- z$value > 0
+z_non_zero <- z[nonzero,]
+write.table(z_non_zero,file="blue_visantOverall_top10.csv",sep="\t",row.names=FALSE)
